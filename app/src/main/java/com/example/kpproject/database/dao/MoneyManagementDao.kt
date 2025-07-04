@@ -9,7 +9,7 @@ import com.example.kpproject.database.entity.MoneyManagement
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface MoneyManagementDAO {
+interface MoneyManagementDao {
 
     @Insert
     suspend fun insertTransaksi(keuangan: MoneyManagement)
