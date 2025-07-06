@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/biru</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ampi</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="windowSplashScreenIconBackgroundColor">@null</item>
+        <item name="android:statusBarColor">@color/biru</item>
+        <item name="android:navigationBarColor">@color/biru</item>
+        <item name="postSplashScreenTheme">@style/Theme.KpProject</item>
+    </style>
+</resources>

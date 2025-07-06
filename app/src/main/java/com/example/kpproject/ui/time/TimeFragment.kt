@@ -1,4 +1,4 @@
-package com.example.kpproject.ui.notifications
+package com.example.kpproject.ui.time
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.kpproject.databinding.FragmentNotificationsBinding
+import com.example.kpproject.databinding.FragmentTimeBinding
 
-class NotificationsFragment : Fragment() {
+class TimeFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentTimeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val timeViewModel =
+            ViewModelProvider(this).get(TimeViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentTimeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        timeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

@@ -2,7 +2,18 @@
     <string name="app_name">KpProject</string>
     <string name="title_activity_navigation">navigation</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_money">Money</string>
+    <string name="title_time">Time</string>
     <string name="total_pengeluaran">Total Pengeluaran</string>
+    <string name="money_management">Money Management</string>
+    <string name="transaction_type">Transaction Type</string>
+    <string name="create_new">Create New</string>
+    <string name="ampi">AMPI</string>
+    <string name="app_logo">App Logo</string>
+    <string name="account_type">Account Type</string>
+    <string name="category">Category</string>
+    <string name="day">Day</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
 </resources>
