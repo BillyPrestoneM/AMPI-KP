@@ -3,4 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="birugelap">#043861</color>
+    <color name="biru">#1D2475</color>
+    <color name="abu">#F7F8F8</color>
 </resources>

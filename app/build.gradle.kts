@@ -53,12 +53,11 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.room.runtime.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.0"))
+    implementation(libs.kotlin.bom)
 
     //coroutine
     implementation(libs.kotlinx.coroutines.android)
