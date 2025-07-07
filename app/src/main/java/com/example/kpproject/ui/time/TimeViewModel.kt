@@ -1,13 +1,38 @@
 package com.example.kpproject.ui.time
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.kpproject.database.entity.TimeManagement
+import com.example.kpproject.repository.TimeManagementRepository
 
-class TimeViewModel : ViewModel() {
+class TimeViewModel(private val repository: TimeManagementRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    private val _currentDay = MutableLiveData<String>()
+
+    fun setDay(day: String) {
+        _currentDay.value = day
     }
-    val text: LiveData<String> = _text
+
+    val tasksPentingMendesak: LiveData<List<TimeManagement>> = _currentDay.switchMap { day ->
+        repository.allTugas.asLiveData().map { list ->
+            list.filter { it.hariMulai.equals(day, ignoreCase = true) && it.kategori == "Penting & Mendesak" }
+        }
+    }
+
+    val tasksPentingTidakMendesak: LiveData<List<TimeManagement>> = _currentDay.switchMap { day ->
+        repository.allTugas.asLiveData().map { list ->
+            list.filter { it.hariMulai.equals(day, ignoreCase = true) && it.kategori == "Penting & Tidak Mendesak" }
+        }
+    }
+
+    val tasksTidakPentingMendesak: LiveData<List<TimeManagement>> = _currentDay.switchMap { day ->
+        repository.allTugas.asLiveData().map { list ->
+            list.filter { it.hariMulai.equals(day, ignoreCase = true) && it.kategori == "Tidak Penting & Mendesak" }
+        }
+    }
+
+    val tasksTidakPentingTidakMendesak: LiveData<List<TimeManagement>> = _currentDay.switchMap { day ->
+        repository.allTugas.asLiveData().map { list ->
+            list.filter { it.hariMulai.equals(day, ignoreCase = true) && it.kategori == "Tidak Penting & Tidak Mendesak" }
+        }
+    }
 }

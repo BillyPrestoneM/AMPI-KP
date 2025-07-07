@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kpproject.databinding.ActivityAddBinding
+import com.example.kpproject.ui.time.AddTimeManagement
 
 class AddActivity : AppCompatActivity() {
 
@@ -21,6 +22,10 @@ class AddActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Kalau ada tombol lain, bisa tambahkan listener-nya di sini
+        // Klik button "Create New Time Management"
+        binding.btnTimeManagement.setOnClickListener {
+            val intent = Intent(this, AddTimeManagement::class.java)
+            startActivity(intent)
+        }
     }
 }

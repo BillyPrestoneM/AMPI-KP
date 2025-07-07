@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_money" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_Time"
         android:name="com.example.kpproject.ui.time.TimeFragment"
         android:label="@string/title_time"
         tools:layout="@layout/fragment_time" />
