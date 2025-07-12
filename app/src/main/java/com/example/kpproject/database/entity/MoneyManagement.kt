@@ -12,28 +12,20 @@ data class MoneyManagement (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0,
-
     @ColumnInfo(name = "tipe_transaksi")
-    val transactionType: String, // "Pemasukan" atau "Pengeluaran"
-
+    val transactionType: String,
     @ColumnInfo(name = "akun")
-    val akun: String, // Tunai, Rekening, Kartu Kredit, E-wallet
-
+    val akun: String,
     @ColumnInfo(name = "kategori")
-    val kategori: String, // Makanan, Pakaian, Gaji, Uang Bulanan, dll.
-
+    val kategori: String,
     @ColumnInfo(name = "deskripsi")
-    val deskripsi: String, // Contoh: Beli Nasi Goreng, Gaji Bulanan
-
+    val deskripsi: String,
     @ColumnInfo(name = "nominal")
     val nominal: Double,
-
     @ColumnInfo(name = "hari")
     val hari: String,
-
     @ColumnInfo(name = "tanggal")
-    val date: String, // Format: YYYY-MM-DD
-
+    val date: String,
     @ColumnInfo(name = "waktu")
-    val time: String // Format: HH:MM
+    val time: String
 ) : Parcelable

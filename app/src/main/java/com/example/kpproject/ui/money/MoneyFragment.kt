@@ -1,5 +1,6 @@
 package com.example.kpproject.ui.money
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,16 +47,17 @@ class MoneyFragment : Fragment() {
 
         return root
     }
-
     private fun setupRecyclerView() {
-        moneyAdapter = MoneyAdapter()
+        moneyAdapter = MoneyAdapter{
+            selectedItem -> val intent = Intent(requireContext(), MoneyDetailActivity::class.java)
+            intent.putExtra("money_data", selectedItem)
+            startActivity(intent)
+        }
         binding.rvLastTransaction.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = moneyAdapter
         }
     }
-
-
     private fun setCurrentMonth() {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("MMMM", Locale.getDefault())
@@ -63,7 +65,6 @@ class MoneyFragment : Fragment() {
 
         binding.tvMonth.text = currentMonth
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

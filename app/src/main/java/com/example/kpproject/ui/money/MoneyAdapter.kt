@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kpproject.database.entity.MoneyManagement
 import com.example.kpproject.databinding.DailyTransactionBinding
 
-class MoneyAdapter :
+class MoneyAdapter (
+    private val onItemClick: (MoneyManagement) -> Unit) :
     ListAdapter<MoneyManagement, MoneyAdapter.MoneyViewHolder>(DiffCallback()) {
 
     inner class MoneyViewHolder(private val binding: DailyTransactionBinding) :
@@ -33,7 +34,13 @@ class MoneyAdapter :
                     else -> Color.BLACK
                 }
             )
+            root.setOnClickListener {
+                onItemClick(item)
+            }
+
             Log.d("MoneyAdapter", "Type: ${item.transactionType}, Nominal: ${item.nominal}")
+
+
 
         }
     }
@@ -46,16 +53,13 @@ class MoneyAdapter :
         )
         return MoneyViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: MoneyViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
     class DiffCallback : DiffUtil.ItemCallback<MoneyManagement>() {
         override fun areItemsTheSame(oldItem: MoneyManagement, newItem: MoneyManagement): Boolean {
             return oldItem.id == newItem.id
         }
-
         override fun areContentsTheSame(oldItem: MoneyManagement, newItem: MoneyManagement): Boolean {
             return oldItem == newItem
         }

@@ -13,8 +13,10 @@ import com.example.kpproject.databinding.FragmentHomeBinding
 import com.example.kpproject.repository.MoneyManagementRepository
 import com.example.kpproject.repository.TimeManagementRepository
 import com.example.kpproject.ui.AddActivity
+import com.example.kpproject.ui.money.MoneyDetailActivity
 import com.example.kpproject.ui.money.MoneyAdapter
 import com.example.kpproject.ui.time.DailyTaskAdapter
+import com.example.kpproject.ui.time.DetailTimeActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,45 +36,39 @@ class HomeFragment : Fragment() {
         val daoTime = AppDatabase.getDatabase(requireContext()).timeManagementDao()
         val moneyRepo = MoneyManagementRepository(daoMoney)
         val timeRepo = TimeManagementRepository(daoTime)
-
-        // ViewModel pakai Factory
         val viewModelFactory = HomeViewModelFactory(moneyRepo, timeRepo)
         val viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
-
         setupRecyclerViews()
-
-        // Hari sekarang
         val currentDay = SimpleDateFormat("EEEE", Locale.getDefault()).format(Date())
         viewModel.setDay(currentDay)
-
-        // Observe Transaksi
         viewModel.transactions.observe(viewLifecycleOwner) { list ->
             moneyAdapter.submitList(list)
         }
-
-        // Observe Tugas
         viewModel.dailyTasks.observe(viewLifecycleOwner) { list ->
             taskAdapter.updateTasks(list)
         }
-
-        // Button tambah
         binding.btnAdd.setOnClickListener {
             startActivity(Intent(requireContext(), AddActivity::class.java))
         }
-
         return binding.root
     }
-
     private fun setupRecyclerViews() {
-        moneyAdapter = MoneyAdapter()
+        moneyAdapter = MoneyAdapter{
+            selectedItem -> val intent = Intent(requireContext(), MoneyDetailActivity::class.java)
+            intent.putExtra("money_data", selectedItem)
+            startActivity(intent)
+        }
         binding.rvTransaction.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTransaction.adapter = moneyAdapter
 
-        taskAdapter = DailyTaskAdapter(emptyList())
+        taskAdapter = DailyTaskAdapter(emptyList()) {
+            selectedItem -> val intent = Intent(requireContext(), DetailTimeActivity::class.java)
+            intent.putExtra("task_data", selectedItem)
+            startActivity(intent)
+        }
         binding.rvTask.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTask.adapter = taskAdapter
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
